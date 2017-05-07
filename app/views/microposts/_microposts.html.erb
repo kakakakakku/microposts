@@ -13,6 +13,11 @@
           <p><%= micropost.content %></p>
         </div>
         <div>
+          <% if micropost.like?(current_user) %>
+            <%= link_to 'Unlike!', micropost_likes_path(micropost), method: :delete, class: 'btn btn-warning btn-xs' %>
+          <% else %>
+            <%= link_to 'Like!', micropost_likes_path(micropost), method: :post, class: 'btn btn-info btn-xs' %>
+          <% end %>
           <% if current_user == micropost.user %>
             <%= link_to "Delete", micropost, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
           <% end %>
